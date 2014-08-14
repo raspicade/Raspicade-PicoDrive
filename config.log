@@ -1,0 +1,9 @@
+gcc /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922-
+gcc -mfpu=vfp -c /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922-.o
+gcc -mfpu=vfp -c /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922-.o
+/tmp/picodrive-conf--4922-.c: In function ‘main’:
+/tmp/picodrive-conf--4922-.c:2:3: attention : ‘avcodec_decode_audio3’ is deprecated (declared at /usr/include/libavcodec/avcodec.h:4131) [-Wdeprecated-declarations]
+gcc -mfpu=vfp /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922-
+gcc -mfpu=vfp /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922- -lasound
+gcc -mfpu=vfp -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922- -L/usr/lib/arm-linux-gnueabihf -lSDL
+gcc -mfpu=vfp -I/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -c /tmp/picodrive-conf--4922-.c -o /tmp/picodrive-conf--4922-.o -Wno-unused-result
