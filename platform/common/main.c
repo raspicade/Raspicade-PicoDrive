@@ -133,6 +133,9 @@ int main(int argc, char *argv[])
 
 			case PGS_Running:
 				emu_loop();
+				//if you don't want menu when exiting game (emulationstation), uncomment
+				//Modification to exit picodrive when pressing ESC key
+				engineState = PGS_Quit;
 				break;
 
 			case PGS_Quit:

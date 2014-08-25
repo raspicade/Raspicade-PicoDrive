@@ -273,8 +273,10 @@ static int handle_joy_event(struct in_sdl_state *state, SDL_Event *event,
 	case SDL_JOYAXISMOTION:
 		if (event->jaxis.which != state->joy_id)
 			return -2;
-		if (event->jaxis.axis > 1)
+		if (event->jaxis.axis > 3)
 			break;
+		if (event->jaxis.axis < 2)
+		{
 		if (-16384 <= event->jaxis.value && event->jaxis.value <= 16384) {
 			kc = state->axis_keydown[event->jaxis.axis];
 			state->axis_keydown[event->jaxis.axis] = 0;
@@ -298,6 +300,34 @@ static int handle_joy_event(struct in_sdl_state *state, SDL_Event *event,
 			down = 1;
 			ret = 1;
 		}
+		}else
+//		if (event->jaxis.axis > 1)
+		{
+		if (-16384 <= event->jaxis.value && event->jaxis.value <= 16384) {
+			kc = state->axis_keydown[event->jaxis.axis];
+			state->axis_keydown[event->jaxis.axis] = 0;
+			ret = 1;
+		}
+		else if (event->jaxis.value < -16384) {
+			kc = state->axis_keydown[event->jaxis.axis];
+			if (kc)
+				update_keystate(state->keystate, kc, 0);
+			kc = event->jaxis.axis%2 ? SDLK_e : SDLK_s;
+			state->axis_keydown[event->jaxis.axis] = kc;
+			down = 1;
+			ret = 1;
+		}
+		else if (event->jaxis.value > 16384) {
+			kc = state->axis_keydown[event->jaxis.axis];
+			if (kc)
+				update_keystate(state->keystate, kc, 0);
+			kc = event->jaxis.axis%2 ? SDLK_d : SDLK_f;
+			state->axis_keydown[event->jaxis.axis] = kc;
+			down = 1;
+			ret = 1;
+		}
+		};
+
 		break;
 
 	case SDL_JOYBUTTONDOWN:
